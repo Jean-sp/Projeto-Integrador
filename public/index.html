@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milhito - Comidas Juninas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!--//Menu-->
+    <header>
+        <div class="logo-container">
+            <img src="imagens/logo_milhito.png" class="logo">
+            <h1>Milhito</h1>
+        </div>
+        <button class="hamburger-menu" aria-label="Abrir menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <nav>
+            <ul>
+                <li><a href="index.html#home">Início</a></li>
+                <li><a href="index.html#products">Produtos</a></li>
+                <li><a href="index.html#team">Equipe</a></li>
+                <li><a href="index.html#location">Localização</a></li>
+                <li><a href="index.html#contact">Contato</a></li>
+                <li><a href="pag2.html">Tudo sobre nos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!--//Menu-->
+
+
+    <main>
+        <!--//Carrossel-->
+        <section id="home">
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item">
+                        <img src="imagens/Milharal_Milhito.jpg" alt="Campo de milho">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="imagens/Bolo_de_milho.jpg" alt="Bolo de milho">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="imagens/Brigadeiro_milhito.jpg" alt="Brigadeiro de milho">
+                    </div>
+                </div>
+                <button class="carousel-control prev">&lt;</button>
+                <button class="carousel-control next">&gt;</button>
+                <div class="carousel-indicators">
+                    <div class="indicator active"></div>
+                    <div class="indicator"></div>
+                    <div class="indicator"></div>
+                </div>
+            </div>
+        </section>
+        <!--//Carrossel-->
+
+        <!---->
+        <section id="products">
+            <h2>Nossos Produtos</h2>
+            <div class="products">
+                <div class="product-card">
+                    <div><img class="circle" src="imagens/silhueta.png" alt=""></div>
+                    <div class="product-image">
+                        <img src="imagens/Bolo_de_milho.jpg" alt="Bolo de Milho">
+                    </div>
+                    <div class="product-info">
+                        <h3>Bolo de Milho</h3>
+                        <p>Delicioso bolo de milho feito com milho fresco e ingredientes selecionados, perfeito para festas juninas.</p>
+                        <p class="price">R$ 25,00 (unidade)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!---->
+
+        <!---->
+        <section id="assessments">
+            <h2>Avaliações</h2>
+            <button class="avaliacao-prev">&#10094;</button>
+            <div class="Slider">
+            <div class="Slides"></div>
+            </div>
+            <button class="avaliacao-next">&#10095;</button>
+        </section>
+        <!---->
+
+        <!---->
+        <section id="location">
+            <h2>Onde Estamos</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1373.2297708049364!2d-50.43720668791457!3d-22.65020919176208!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjLCsDM4JzU4LjgiUyA1MMKwMjYnMTUuMyJX!5e1!3m2!1spt-BR!2sbr!4v1744817216059!5m2!1spt-BR!2sbr"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+        <!---->
+
+        <!---->
+        <section id="team">
+            <h2>Nossa Equipe</h2>
+            <div class="team-carousel-container">
+                <div class="team-members"> <div class="team-member">
+                    <img src="imagens/ana.jpeg" alt="Ana">
+                    <h3>Ana</h3>
+                    <p>Função</p>
+                </div>
+                <div class="team-member">
+                    <img src="imagens/paulo.jpeg" alt="Paulo">
+                    <h3>Paulo</h3>
+                    <p>Função</p>
+                </div>
+                <div class="team-member">
+                    <img src="imagens/hellen.jpeg" alt="Hellen">
+                    <h3>Hellen</h3>
+                    <p>Função</p>
+                </div>
+                <div class="team-member">
+                    <img src="imagens/luis.jpeg" alt="Luis">
+                    <h3>Luis</h3>
+                    <p>Função</p>
+                </div>
+                <div class="team-member">
+                    <img src="imagens/gabriele.jpeg" alt="Gabriele">
+                    <h3>Gabriele</h3>
+                    <p>Função</p>
+                </div>
+                <div class="team-member">
+                    <img src="imagens/giuliana.jpeg" alt="Giuliana">
+                    <h3>Giuliana</h3>
+                    <p>Função</p>
+                </div>
+                <button class="team-carousel-prev">&lt;</button>
+                <button class="team-carousel-next">&gt;</button>
+            </div>
+            <div class="team-intro">
+                    <h3>Sobre a Equipe</h3>
+                    <p>A Milhito é uma empresa focada na produção de bolos de milho doce, destacando a qualidade e o sabor desse ingrediente tão tradicional na culinária.</p>
+                    <p>Nosso compromisso é oferecer produtos preparados com cuidado e ingredientes selecionados, garantindo uma experiência única para quem aprecia o verdadeiro gosto do milho.</p>
+                    <a href="pag2.html" target="_blank" rel="noopener noreferrer">Tudo sobre nos</a>
+            </div>
+        </section>
+        <!---->
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+        <section id="SectionComentarios">
+            <div class="SectionComentariosInterna">
+
+                <section id="SectionFormulario">
+                    <h2 class="TituloSectionComentarios">Deixe seu comentário</h2>
+                    <form id="comentarioForm">
+                        <input data-aos="zoom-in" data-aos-delay="200" maxlength="120" type="text" id="nome" placeholder="Seu nome" required/>
+                        <textarea data-aos="zoom-in" data-aos-delay="1000"id="mensagem" placeholder="Sua mensagem" maxlength="300" required></textarea>
+
+                        <div class="estrelas-avaliacao" data-aos="zoom-in" data-aos-delay="1000">
+                            <span class="star" data-value="1">&#9733</span>
+                            <span class="star" data-value="2">&#9733</span>
+                            <span class="star" data-value="3">&#9733</span>
+                            <span class="star" data-value="4">&#9733</span>
+                            <span class="star" data-value="5">&#9733</span>
+                        </div>
+                        <input type="hidden" id="nota" name="nota" value="" required>
+                        <button
+                            data-aos="fade-up"
+                            data-aos-delay="1400"
+                            id="ButtonSubmit"
+                            type="submit"
+                            >
+                            Enviar
+                        </button>
+                    </form>
+                </section>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contato</h2>
+            <div class="social-links">
+                <a href="https://wa.me/5511987654321" target="_blank" aria-label="WhatsApp"><img src="imagens/whatsapp.jpg" alt=""><i class="fab fa-whatsapp"></i></a>
+                <!--<a href="https://facebook.com/sitiodomilhoamarelo" target="_blank" aria-label="Facebook"><img src="imagens/facebook-icon.png" alt=""><i class="fab fa-facebook-f"></i></a>-->
+                <a href="https://instagram.com/milhito" target="_blank" aria-label="Instagram"><img src="imagens/Instagram_icon.png" alt=""><i class="fab fa-instagram"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <!--<div class="footer-section">
+                <h3>Sobre Nós</h3>
+                <p>A Milhito é uma empresa focada na produção de bolos de milho doce, destacando a qualidade e o sabor desse ingrediente tão tradicional na culinária.Nosso compromisso é oferecer produtos preparados com cuidado e ingredientes selecionados, garantindo uma experiência única para quem aprecia o verdadeiro gosto do milho.</p>
+            </div>-->
+            <!--<div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <a href="#home">Início</a>
+                <a href="#products">Produtos</a>
+                <a href="#team">Equipe</a>
+                <a href="#location">Localização</a>
+                <a href="#contact">Contato</a>
+                <a href="pag2.html">Tudo sobre nos</a>
+            </div>-->
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p><i class="fas fa-map-marker-alt"></i>  Av. Dom Antônio, 2100  - Parque Universitario  Unesp - Faculdade de Ciências e Letras</p>
+                <p><i class="fas fa-phone"></i> (11) 98765-4321</p>
+                <p><i class="fas fa-envelope"></i> </p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 MILHITO - Todos os direitos reservados - <a href="pag3.html">Desenvolvedores</a></p>
+        </div>
+    </footer>
+    <script>
+        document.querySelectorAll('.star-icon').forEach(star => {
+            star.addEventListener('click', function () {
+                const rating = this.getAttribute('data-avaliacao');
+            document.getElementById('avaliacao').value = rating;
+
+            document.querySelectorAll('.star-icon').forEach(s => s.classList.remove('ativo'));
+            this.classList.add('ativo');
+            });
+        });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Carrossel
+        const carouselInner = document.querySelector('.carousel-inner');
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const prevBtn = document.querySelector('.carousel-control.prev');
+        const nextBtn = document.querySelector('.carousel-control.next');
+        const indicators = document.querySelectorAll('.indicator');
+        
+        let currentIndex = 0;
+        const itemCount = carouselItems.length;
+        
+        function updateCarousel() {
+            carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            indicators.forEach((indicator, index) => {
+                if (index === currentIndex) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
+        
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + itemCount) % itemCount;
+            updateCarousel();
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % itemCount;
+            updateCarousel();
+        });
+        
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
+        });
+        
+        // Auto-rotate carousel
+        let carouselInterval = setInterval(() => {
+            currentIndex = (currentIndex + 1) % itemCount;
+            updateCarousel();
+        }, 5000);
+        
+        // Pause on hover
+        const carousel = document.querySelector('.carousel');
+        carousel.addEventListener('mouseenter', () => {
+            clearInterval(carouselInterval);
+        });
+        
+        carousel.addEventListener('mouseleave', () => {
+            carouselInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % itemCount;
+                updateCarousel();
+            }, 5000);
+        });
+        // --- Novo código para o Carrossel da Equipe (Mobile) ---
+        const teamCarouselContainer = document.querySelector('.team-carousel-container');
+        // Verifique se teamCarouselContainer existe antes de tentar acessar suas propriedades
+        if (teamCarouselContainer) {
+            const teamMembersContainer = teamCarouselContainer.querySelector('.team-members'); // Este é o elemento que desliza
+            const teamMemberCards = teamMembersContainer.querySelectorAll('.team-member');
+            const teamPrevButton = teamCarouselContainer.querySelector('.team-carousel-prev');
+            const teamNextButton = teamCarouselContainer.querySelector('.team-carousel-next');
+
+            let teamCurrentSlide = 0;
+            let teamIsTransitioning = false;
+
+            function isMobileTeamCarouselActive() {
+                return window.innerWidth <= 768; // Este breakpoint deve corresponder ao CSS
+            }
+
+            function updateTeamSlider() {
+                if (!isMobileTeamCarouselActive()) return;
+
+                teamIsTransitioning = true;
+                const offset = -teamCurrentSlide * 100;
+                teamMembersContainer.style.transform = `translateX(${offset}%)`;
+                
+                setTimeout(() => {
+                    teamIsTransitioning = false;
+                }, 500);
+            }
+
+            function updateTeamButtonsVisibility() {
+                if (!isMobileTeamCarouselActive()) {
+                    teamPrevButton.style.display = "none";
+                    teamNextButton.style.display = "none";
+                    return;
+                }
+
+        teamPrevButton.style.display = teamCurrentSlide === 0 ? "none" : "block";
+        teamNextButton.style.display = teamCurrentSlide >= teamMemberCards.length - 6 ? "none" : "block";
+    }
+
+    teamNextButton.addEventListener('click', () => {
+        if (teamIsTransitioning || !isMobileTeamCarouselActive()) return;
+        if (teamCurrentSlide < teamMemberCards.length - 5) {
+            teamCurrentSlide++;
+            updateTeamSlider();
+            updateTeamButtonsVisibility();
+        }
+    });
+
+    teamPrevButton.addEventListener('click', () => {
+        if (teamIsTransitioning || !isMobileTeamCarouselActive()) return;
+        if (teamCurrentSlide > 0) {
+            teamCurrentSlide--;
+            updateTeamSlider();
+            updateTeamButtonsVisibility();
+        }
+    });
+
+    updateTeamSlider();
+    updateTeamButtonsVisibility();
+
+    window.addEventListener('resize', () => {
+        teamCurrentSlide = 0;
+        updateTeamSlider();
+        updateTeamButtonsVisibility();
+        if (!isMobileTeamCarouselActive()) {
+            teamMembersContainer.style.transform = `translateX(0%)`;
+        }
+    });
+    }
+    });document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+
+        if (href.startsWith('#')) {
+            e.preventDefault();
+
+            const targetId = href;
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    });
+    });
+    </script>
+    <script>(() => {
+    const firebaseConfig = {
+      apiKey: "AIzaSyAlfutnz2Hs8zL3znkO9UbX89w09q1xKh0",
+      authDomain: "milhitofatec.firebaseapp.com",
+      projectId: "milhitofatec",
+      storageBucket: "milhitofatec.firebasestorage.app",
+      messagingSenderId: "828700959166",
+      appId: "1:828700959166:web:eb45d1875d1667df70d9ef"
+    };
+  
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  
+    document.getElementById("comentarioForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+  
+      const nome = document.getElementById("nome").value;
+      const mensagem = document.getElementById("mensagem").value;
+      const nota = parseInt(document.getElementById("nota").value);
+  
+      try {
+        await db.collection("comentarios").add({
+          nome,
+          mensagem,
+          nota,
+          criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+  
+        alert("Comentário enviado com sucesso!");
+        document.getElementById("comentarioForm").reset();
+      } catch (err) {
+        console.error("Erro ao enviar comentário: ", err);
+        alert("Erro ao enviar comentário.");
+      }
+    });
+  
+    const containerSlides = document.querySelector(".Slides");
+    let comentarios = [];
+  
+    firebase
+      .firestore()
+      .collection("comentarios")
+      .orderBy("nota", "desc")
+      .onSnapshot((snapshot) => {
+        comentarios = [];
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          comentarios.push(data);
+        });
+  
+        // Chama a função para atualizar os slides
+        if (typeof window.addSlidesToSlider === "function") {
+          window.addSlidesToSlider(comentarios);
+        }
+      });
+    })();</script>
+    <script>
+    (() => {
+    let currentSlide = 0;
+    const slidesContainer = document.querySelector(".Slides");
+    let totalSlides = 0;
+    let isTransitioning = false;
+
+    // Função para atualizar a posição do slide
+    function updateSlider() {
+        if (totalSlides === 0 || isTransitioning) return;
+
+        isTransitioning = true;
+        slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+        // Remove o flag quando a transição terminar
+        const handleTransitionEnd = () => {
+        isTransitioning = false;
+        slidesContainer.removeEventListener("transitionend", handleTransitionEnd);
+        };
+
+        slidesContainer.addEventListener("transitionend", handleTransitionEnd);
+    }
+
+    // Função para adicionar slides
+    function addSlidesToSlider(comentarios) {
+        isTransitioning = true; // Bloqueia durante a atualização
+
+        slidesContainer.style.transition = "none"; // Desativa transição temporariamente
+        slidesContainer.innerHTML = "";
+
+        if (!comentarios || comentarios.length === 0) {
+        const slide = document.createElement("div");
+        slide.classList.add("slide-dinamico");
+        slide.innerHTML = `
+            <div class=".Slides-card">
+            <h3 class="nome-comentario">Nenhum comentário ainda</h3>
+            <p class="texto-comentario">Seja o primeiro a deixar seu comentário!</p>
+            </div>
+        `;
+        slidesContainer.appendChild(slide);
+        } else {
+        comentarios.forEach((comentario) => {
+            const slide = document.createElement("div");
+            slide.classList.add("slide-dinamico");
+            slide.innerHTML = `
+            <div>
+                <h3 class="nome-comentario">${comentario.nome || "Anônimo"}</h3>
+                <p class="texto-comentario" style="white-space: pre-wrap;">${
+                comentario.mensagem || "Sem mensagem"
+                }</p>
+                <div class="estrelas">${"&#9733".repeat(comentario.nota || 0)}</div>
+            </div>
+            `;
+            slidesContainer.appendChild(slide);
+        });
+        }
+
+        totalSlides = slidesContainer.children.length;
+        currentSlide = 0;
+        slidesContainer.style.transform = "translateX(0)";
+
+        // Força o navegador a reconhecer a mudança
+        void slidesContainer.offsetWidth;
+
+        // Reativa a transição
+        slidesContainer.style.transition =
+        "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+        isTransitioning = false;
+    }
+
+    // Event listeners para os botões
+    document.querySelector(".avaliacao-next").addEventListener("click", () => {
+        if (totalSlides <= 1 || isTransitioning) return;
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlider();
+    });
+
+    document.querySelector(".avaliacao-prev").addEventListener("click", () => {
+        if (totalSlides <= 1 || isTransitioning) return;
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSlider();
+    });
+
+    // Torna a função acessível globalmente
+    window.addSlidesToSlider = addSlidesToSlider;
+    })();
+</script>
+
+<script>
+    (() => {
+        let currentSlide = 0;
+        const slidesContainer = document.querySelector(".Slides");
+        const prevButton = document.querySelector(".avaliacao-prev");
+        const nextButton = document.querySelector(".avaliacao-next");
+        let totalSlides = 0;
+        let isTransitioning = false;
+        let slideWidth = 0;
+        let slideGap = 0;
+        let cardsPerPage = 3;
+
+        function calculateCardsPerPage() {
+            cardsPerPage = Math.min(totalSlides, 3);
+        }
+
+        function calculateSlideDimensions() {
+            if (slidesContainer.children.length > 0) {
+                slideWidth = slidesContainer.children[0].offsetWidth;
+                slideGap = parseFloat(window.getComputedStyle(slidesContainer).gap) || 0;
+            }
+        }
+
+        function calculateVisibleWidth() {
+            return (slideWidth + slideGap) * cardsPerPage;
+        }
+
+        function updateSlider() {
+            if (totalSlides === 0 || isTransitioning) return;
+
+            isTransitioning = true;
+            const visibleWidth = calculateVisibleWidth();
+            const translateX = -currentSlide * visibleWidth;
+            slidesContainer.style.transform = `translateX(${translateX}px)`;
+
+            const handleTransitionEnd = () => {
+                isTransitioning = false;
+                slidesContainer.removeEventListener("transitionend", handleTransitionEnd);
+            };
+
+            slidesContainer.addEventListener("transitionend", handleTransitionEnd);
+        }
+
+        function addSlidesToSlider(comentarios) {
+            isTransitioning = true;
+
+            slidesContainer.style.transition = "none";
+            slidesContainer.innerHTML = "";
+
+            if (!comentarios || comentarios.length === 0) {
+                const slide = document.createElement("div");
+                slide.classList.add("slide-dinamico");
+                slide.innerHTML = `
+                    <div class=".Slides-card">
+                    <h3 class="nome-comentario">Nenhum comentário ainda</h3>
+                    <p class="texto-comentario">Seja o primeiro a deixar seu comentário!</p>
+                    </div>
+                `;
+                slidesContainer.appendChild(slide);
+            } else {
+                comentarios.forEach((comentario) => {
+                    const slide = document.createElement("div");
+                    slide.classList.add("slide-dinamico");
+                    slide.innerHTML = `
+                    <div>
+                        <h3 class="nome-comentario">${comentario.nome || "Anônimo"}</h3>
+                        <p class="texto-comentario" style="white-space: pre-wrap;">${
+                        comentario.mensagem || "Sem mensagem"
+                        }</p>
+                        <div class="estrelas">${"&#9733".repeat(comentario.nota || 0)}</div>
+                    </div>
+                    `;
+                    slidesContainer.appendChild(slide);
+                });
+            }
+
+            totalSlides = slidesContainer.children.length;
+            currentSlide = 0;
+            slidesContainer.style.transform = "translateX(0)";
+
+            calculateSlideDimensions(); // Calcula slideWidth e slideGap
+            calculateCardsPerPage();
+            updateButtonsVisibility();
+
+            void slidesContainer.offsetWidth; // Força o layout
+
+            slidesContainer.style.transition =
+            "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+            isTransitioning = false;
+        }
+
+        function updateButtonsVisibility() {
+            const prevButton = document.querySelector(".avaliacao-prev");
+            const nextButton = document.querySelector(".avaliacao-next");
+            const totalPages = Math.ceil(totalSlides / cardsPerPage);
+
+            if (totalSlides <= cardsPerPage || totalPages <= 1) {
+                prevButton.style.display = "none";
+                nextButton.style.display = "none";
+            } else {
+                prevButton.style.display = currentSlide === 0 ? "none" : "block";
+                nextButton.style.display = currentSlide === totalPages - 1 ? "none" : "block";
+            }
+        }
+
+        nextButton.addEventListener("click", () => {
+            if (isTransitioning) return;
+            const totalPages = Math.ceil(totalSlides / cardsPerPage);
+            if (currentSlide < totalPages - 1) {
+                currentSlide++;
+                updateSlider();
+                updateButtonsVisibility();
+            }
+        });
+
+        prevButton.addEventListener("click", () => {
+            if (isTransitioning) return;
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlider();
+                updateButtonsVisibility();
+            }
+        });
+
+        window.addSlidesToSlider = addSlidesToSlider;
+    })();
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const starContainer = document.querySelector('.estrelas-avaliacao');
+        const stars = starContainer.querySelectorAll('.star');
+        const hiddenInputNota = document.getElementById('nota');
+    
+        // Função para atualizar a aparência das estrelas com base na seleção
+        function updateStarAppearance(selectedIndex) {
+            stars.forEach((star, index) => {
+                if (index < selectedIndex) {
+                    star.classList.add('selected');
+                } else {
+                    star.classList.remove('selected');
+                }
+            });
+        }
+    
+        // Adicionar event listeners para clique
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const value = this.getAttribute('data-value');
+                hiddenInputNota.value = value; // Define o valor do input hidden
+                updateStarAppearance(parseInt(value)); // Atualiza a aparência das estrelas
+            });
+        });
+    
+        // Opcional: Adicionar event listeners para hover (efeito visual antes de clicar)
+        starContainer.addEventListener('mouseover', function(e) {
+            const hoveredStar = e.target.closest('.star');
+            if (hoveredStar) {
+                const value = parseInt(hoveredStar.getAttribute('data-value'));
+                stars.forEach((star, index) => {
+                    if (index < value) {
+                        star.style.color = 'var(--primary-color)'; // Cor ao passar o mouse
+                    } else {
+                        star.style.color = '#ccc'; // Cor padrão para as não hover
+                    }
+                });
+            }
+        });
+    
+        // Opcional: Resetar cor ao sair do container, a menos que uma estrela esteja selecionada
+        starContainer.addEventListener('mouseout', function() {
+            const selectedValue = parseInt(hiddenInputNota.value) || 0;
+            stars.forEach((star, index) => {
+                if (index < selectedValue) {
+                    star.style.color = 'var(--primary-color)'; // Mantém cor se selecionada
+                } else {
+                    star.style.color = '#ccc'; // Cor padrão se não selecionada
+                }
+            });
+        });
+    
+        // Manter a seleção visual caso a página seja recarregada com um valor pré-existente
+        const initialValue = parseInt(hiddenInputNota.value) || 0;
+        if (initialValue > 0) {
+            updateStarAppearance(initialValue);
+        }
+    });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ... (seu código JavaScript existente para carrossel, rolagem suave, firebase e slider de avaliações) ...
+
+        // --- Novo código para o Menu Hamburguer ---
+        const hamburgerBtn = document.querySelector('.hamburger-menu');
+        const navMenu = document.querySelector('nav');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburgerBtn.classList.toggle('active'); // Adiciona/remove classe para animação do X
+        });
+
+        // Opcional: Fechar o menu ao clicar em um link (para rolagem suave)
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    hamburgerBtn.classList.remove('active');
+                }
+            });
+        });
+    });
+    </script>
+</body> 
+</html>

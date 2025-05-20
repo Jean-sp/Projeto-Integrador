@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milhito - Sobre nós</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="imagens/logo_milhito.png" class="logo">
+            <h1>Milhito</h1>
+        </div>
+        <button class="hamburger-menu" aria-label="Abrir menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <nav>
+            <ul>
+                <li><a href="index.html#home">Início</a></li>
+                <li><a href="index.html#products">Produtos</a></li>
+                <li><a href="index.html#team">Equipe</a></li>
+                <li><a href="index.html#location">Localização</a></li>
+                <li><a href="index.html#contact">Contato</a></li>
+                <li><a href="pag2.html">Tudo sobre nos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="team">
+            <h2>Nossa Equipe</h2>
+            <div class="team-carousel-container">
+                <div class="team-members"> <div class="team-member">
+                    <img src="imagens/valter.jpg" alt="Ana">
+                    <h3>Valter</h3>
+                    <p>Função</p>
+                </div>
+                <div class="team-member">
+                    <img src="imagens/paulo.jpeg" alt="Paulo">
+                    <h3>Paula</h3>
+                    <p>Função</p>
+                </div>
+                <div class="team-member">
+                    <img src="imagens/hellen.jpeg" alt="Hellen">
+                    <h3>Jean</h3>
+                    <p>Função</p>
+                </div>
+                <div class="team-member">
+                    <img src="imagens/luis.jpeg" alt="Luis">
+                    <h3>Natalia</h3>
+                    <p>Função</p>
+                </div>
+                <div class="team-member">
+                    <img src="imagens/gabriele.jpeg" alt="Gabriele">
+                    <h3>Maju</h3>
+                    <p>Função</p>
+                </div>
+                <div class="team-member">
+                    <img src="imagens/giuliana.jpeg" alt="Giuliana">
+                    <h3>Inexistente</h3>
+                    <p>Função</p>
+                </div>
+                <button class="team-carousel-prev">&lt;</button>
+                <button class="team-carousel-next">&gt;</button>
+            </div>
+            <div class="team-intro">
+                    <h3>Sobre a Equipe</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus quae officia nemo vitae neque asperiores ad. Odit iure doloribus molestiae nesciunt, explicabo porro itaque assumenda officia et voluptatem, vitae ullam!</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis nulla quas minima ad perspiciatis impedit ut, tenetur neque modi a excepturi facere molestias quos, recusandae voluptatum. Recusandae voluptatem et dolorem.</p>
+            </div>
+        </section>
+    <footer>
+        <div class="footer-content">
+            <!--<div class="footer-section">
+                <h3>Sobre Nós</h3>
+                <p>A Milhito é uma empresa focada na produção de bolos de milho doce, destacando a qualidade e o sabor desse ingrediente tão tradicional na culinária.Nosso compromisso é oferecer produtos preparados com cuidado e ingredientes selecionados, garantindo uma experiência única para quem aprecia o verdadeiro gosto do milho.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <a href="#home">Início</a>
+                <a href="#products">Produtos</a>
+                <a href="#team">Equipe</a>
+                <a href="#location">Localização</a>
+                <a href="#contact">Contato</a>
+                <a href="pag2.html">Tudo sobre nos</a>
+            </div>-->
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p><i class="fas fa-map-marker-alt"></i>  Av. Dom Antônio, 2100  - Parque Universitario  Unesp - Faculdade de Ciências e Letras</p>
+                <p><i class="fas fa-phone"></i> (11) 98765-4321</p>
+                <p><i class="fas fa-envelope"></i> </p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 MILHITO - Todos os direitos reservados - <a href="pag3.html">Desenvolvedores</a></p>
+        </div>
+    </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburgerBtn = document.querySelector('.hamburger-menu');
+        const navMenu = document.querySelector('nav');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburgerBtn.classList.toggle('active');
+        });
+
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    hamburgerBtn.classList.remove('active');
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
