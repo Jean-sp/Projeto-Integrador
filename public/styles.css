@@ -39,6 +39,23 @@ header {
     justify-content: center;
     margin-bottom: 1rem;
     font-size: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-container video{
+    position:absolute;
+    width:100%;
+    height: 100%;
+    top:0;
+    left:0;
+    z-index:0;
+    object-fit:cover;
+}
+
+.logo-container h1 {
+    position:relative;
+    z-index:1;
 }
 
 .logo {
@@ -48,6 +65,8 @@ header {
     border-radius: 50%;
     border: 3px solid white;
     object-fit: cover;
+    z-index: 1;
+    
 }
 
 .hamburger-menu {
@@ -277,13 +296,12 @@ h2::after {
 .Slider {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch; /* Para que os slides possam ter alturas diferentes se height for auto */
     width: 88%;
-    height: 120%;
     position: relative;
     overflow: hidden;
     padding: 0;
-    height: 300px;
+    height: 300px; /* Altura base para desktop, será ajustada para mobile */
 }
 
 .Slides {
@@ -291,8 +309,8 @@ h2::after {
     justify-content: flex-start;
     gap: 2rem;
     width: calc((300px + 2rem) * 3);
-    max-width: calc((300px + 2rem) * 3);
-    transition: transform 0.5s ease-in-out;
+    max-width: calc((300px + 2rem) * 3); /* Mantido para desktop */
+    transition: transform 0.5s ease-in-out;    
 }
 
 .slide-dinamico {
@@ -302,6 +320,9 @@ h2::after {
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     flex: 0 0 300px;
+    display: flex; /* Para melhor controle do conteúdo interno */
+    flex-direction: column;
+    justify-content: center;
 }
 
 .avaliacao-next {
@@ -744,6 +765,7 @@ footer {
 
     .logo-container {
         margin-bottom: 0;
+        flex-direction: row; /* Logo e título na mesma linha */
     }
 
     .logo-container h1 {
@@ -802,6 +824,35 @@ footer {
     .hamburger-menu.active .bar:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
     }
+
+    /* Ajustes para o slider de avaliações */
+    .Slider {
+        width: 90%; /* Slider ocupa mais espaço na largura */
+        height: auto; /* Altura se ajusta ao conteúdo */
+        min-height: 280px; /* Altura mínima para garantir visibilidade */
+    }
+
+    .Slides {
+        gap: 0; /* Remove o espaçamento entre slides */
+        /* A largura total será determinada pelos flex items (slides) */
+        /* Não é necessário definir width/max-width aqui se os slides são 100% */
+        width: auto; 
+        max-width: none;
+    }
+
+    .slide-dinamico {
+        flex: 0 0 100%; /* Cada slide ocupa 100% da largura do .Slider */
+        padding: 1.5rem; /* Reduz o padding interno do slide */
+        min-height: 250px; /* Garante uma altura mínima para o conteúdo do slide */
+    }
+    
+    .avaliacao-prev,
+    .avaliacao-next {
+        width: 40px; /* Diminui um pouco os botões */
+        height: 40px;
+        font-size: 1rem; /* Ajusta o tamanho do ícone */
+    }
+
 
     /* Outras regras de responsividade para 768px */
     .carousel-item img {
@@ -908,6 +959,20 @@ footer {
     nav ul li a {
         font-size: 0.95rem; /* Fonte dos links ligeiramente menor */
     }
+
+    /* Ajustes adicionais para o slider de avaliações em telas menores */
+    .Slider {
+        width: 95%; /* Slider pode ocupar quase toda a largura */
+        min-height: 260px; /* Ajusta altura mínima se necessário */
+    }
+
+    .slide-dinamico {
+        padding: 1rem; /* Padding ainda menor para telas pequenas */
+        min-height: 220px; /* Ajusta altura mínima do slide */
+        font-size: 0.9rem; /* Pode ser necessário ajustar fontes dentro do slide */
+    }
+    .slide-dinamico .nome-comentario { font-size: 1.5rem; }
+    .slide-dinamico .estrelas { font-size: 1.5rem; }
 
     /* Outros ajustes que já estavam para 480px */
     section {
