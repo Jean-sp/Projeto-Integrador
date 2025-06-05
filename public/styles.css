@@ -483,7 +483,7 @@ h2::after {
     cursor: pointer;
     z-index: 10;
     border-radius: 50%;
-    font-size: 1.5rem;
+    font-size: 2rem;
     line-height: 1;
     transition: background-color 0.3s ease;
 }
@@ -500,6 +500,74 @@ h2::after {
 .team-carousel-next {
     right: 10px;
 }
+
+/* Estilos para o Carrossel de Desenvolvedores em pag3.html */
+.developer-carousel-container {
+    position: relative;
+    margin: 0 auto;
+    overflow: visible; /* No desktop, permite que os itens fiquem lado a lado e transbordem se necessário */
+}
+
+.developer-members {
+    display: flex;
+    flex-wrap: nowrap; /* Itens em uma única linha no desktop, similar à equipe */
+    justify-content: center; /* Centraliza o grupo de cards se não preencherem a largura */
+    gap: 1rem; /* Espaçamento entre os cards no desktop */
+    margin-top: 3rem;
+    transition: none; /* Transição de transform apenas no mobile */
+    transform: none; /* Transform aplicado apenas no mobile */
+}
+
+.developer-member {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    text-align: center;
+    box-sizing: border-box;
+    flex: 0 0 auto; /* Permite que os cards tenham sua largura natural ou definida */
+    width: 220px; /* Exemplo de largura para os cards no desktop, ajuste conforme necessário */
+    /* max-width: calc(17.777% - 1.5rem); */ /* Se quiser um comportamento de % como o da equipe */
+}
+
+.developer-member img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.developer-member h3 {
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.developer-member p {
+    font-size: 0.95rem;
+    color: var(--text-color);
+}
+
+/* Botões de Navegação do Carrossel de Desenvolvedores (Escondidos por padrão no desktop) */
+.developer-carousel-prev,
+.developer-carousel-next {
+    display: none; /* Escondido por padrão, JS controla no mobile */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    font-size: 2rem; /* Ajuste conforme o tamanho dos botões da equipe */
+    line-height: 1;
+}
+
+.developer-carousel-prev { left: 10px; } /* Ajuste a posição se necessário */
+.developer-carousel-next { right: 10px; } /* Ajuste a posição se necessário */
 
 .map-container {
     height: 400px;
@@ -756,6 +824,10 @@ footer {
     right: 10px;
 }
 
+.desenvolvedor{
+    color: var(--secondary-color);
+}
+
 @media (max-width: 768px) {
     header {
         flex-direction: row; /* Logo e hamburguer na mesma linha */
@@ -848,11 +920,14 @@ footer {
     
     .avaliacao-prev,
     .avaliacao-next {
-        width: 40px; /* Diminui um pouco os botões */
-        height: 40px;
-        font-size: 1rem; /* Ajusta o tamanho do ícone */
+        font-size: 2rem; /* Ajusta o tamanho do ícone */
     }
-
+    .avaliacao-prev {
+        left: 30px; /* Ajusta a posição do botão anterior */
+    }
+    .avaliacao-next {
+        right: 30px; /* Ajusta a posição do botão posterior */
+    }
 
     /* Outras regras de responsividade para 768px */
     .carousel-item img {
@@ -910,10 +985,10 @@ footer {
 
     /* Ajustes para a posição dos botões em relação ao container do carrossel */
     .team-carousel-prev {
-        left: 5px;
+        left: 10%; /* Aumentado para afastar da margem esquerda */
     }
     .team-carousel-next {
-        right: 5px;
+        right: 10%; /* Aumentado para afastar da margem direita */
     }
     .team-intro {
         font-size: 1rem;
@@ -921,6 +996,31 @@ footer {
     .team-intro a {
         font-size: 1.5rem;
         margin-top: 40px;
+    }
+
+    /* Carrossel de Desenvolvedores no Mobile */
+    .developer-carousel-container {
+        overflow: hidden; /* Essencial para o efeito de carrossel */
+        /* max-width: 90%; */ /* Opcional: se quiser limitar a largura do carrossel */
+        /* margin-left: auto; */
+        /* margin-right: auto; */
+    }
+    .developer-members {
+        /* flex-wrap: nowrap; já está definido para desktop e se mantém */
+        justify-content: flex-start; /* Alinha os slides para o início para o efeito de carrossel */
+        gap: 0; /* Remove o espaçamento entre os slides no carrossel */
+        transition: transform 0.5s ease-in-out; /* Animação do deslize */
+    }
+    .developer-member {
+        flex: 0 0 100%; /* Cada slide ocupa 100% da largura do container */
+        max-width: 100%;
+        width: 100%; /* Garante que o width do desktop não interfira */
+        /* padding: 1rem; */ /* Ajuste o padding interno se necessário */
+    }
+    .developer-carousel-prev,
+    .developer-carousel-next {
+        display: block; /* Mostra os botões de navegação no mobile */
+        /* Ajuste left/right aqui se a posição padrão não for adequada */
     }
     .footer-content {
         grid-template-columns: 1fr;
@@ -996,7 +1096,6 @@ footer {
     }
     .team-carousel-prev,
     .team-carousel-next {
-        padding: 6px 10px; /* Botões um pouco menores */
         font-size: 1.1rem;
     }
     .social-links a {

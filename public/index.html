@@ -205,7 +205,7 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2025 MILHITO - Todos os direitos reservados - <a href="pag3.html">Desenvolvedores</a></p>
+            <p>&copy; 2025 MILHITO - Todos os direitos reservados - <a class= "desenvolvedor" href="pag3.html">Desenvolvedores</a></p>
         </div>
     </footer>
     <!--//Rodapé-->
@@ -267,21 +267,24 @@
         
         // Auto-rotate carousel
         let carouselInterval = setInterval(() => {
+            if (document.hidden) return; // Don't animate if tab is not visible
             currentIndex = (currentIndex + 1) % itemCount;
             updateCarousel();
-        }, 2000);
+        }, 3000); // Tempo de auto-rotação padronizado
         
         // Pause on hover
         const carousel = document.querySelector('.carousel');
         carousel.addEventListener('mouseenter', () => {
             clearInterval(carouselInterval);
         });
-        
+
         carousel.addEventListener('mouseleave', () => {
+            clearInterval(carouselInterval); // Garante que qualquer intervalo anterior seja limpo
             carouselInterval = setInterval(() => {
+                if (document.hidden) return; // Don't animate if tab is not visible
                 currentIndex = (currentIndex + 1) % itemCount;
                 updateCarousel();
-            }, 1000);
+            }, 3000); // Tempo de auto-rotação padronizado
         });
 
 
@@ -297,6 +300,8 @@
             let teamCurrentSlide = 0;
             let teamIsTransitioning = false;
             const totalTeamSlides = teamMemberCards.length;
+            let teamCarouselInterval;
+            let teamTransitionTimeoutId; // Para o fallback do transitionend
 
             // Função para verificar se o carrossel da equipe deve estar ativo (modo mobile)
             function isMobileTeamCarouselActive() {
@@ -313,14 +318,26 @@
                 
                 teamIsTransitioning = true;
                 const offset = -teamCurrentSlide * 100; // Cada slide ocupa 100% da largura
+                const transitionDuration = 500; // Deve corresponder à duração da transição no CSS (0.5s)
+
                 teamMembersContainer.style.transform = `translateX(${offset}%)`;
                 
+                // Limpa timeout anterior se houver
+                clearTimeout(teamTransitionTimeoutId);
+
                 // Usar 'transitionend' para saber quando a transição terminou
                 const handleTransitionEnd = () => {
+                    clearTimeout(teamTransitionTimeoutId); // Limpa o fallback
                     teamIsTransitioning = false;
                     teamMembersContainer.removeEventListener('transitionend', handleTransitionEnd);
                 };
                 teamMembersContainer.addEventListener('transitionend', handleTransitionEnd);
+
+                // Fallback caso o transitionend não dispare
+                teamTransitionTimeoutId = setTimeout(() => {
+                    console.warn('Team carousel transitionend fallback triggered.');
+                    handleTransitionEnd(); // Chama o handler para resetar o estado
+                }, transitionDuration + 100); // Um pouco mais que a duração da transição
             }
 
             // Função para atualizar a visibilidade dos botões de navegação da equipe
@@ -334,6 +351,24 @@
                 teamPrevButton.style.display = teamCurrentSlide === 0 ? "none" : "block";
                 teamNextButton.style.display = teamCurrentSlide >= totalTeamSlides - 1 ? "none" : "block";
             }
+
+            function startTeamAutoScroll() {
+                if (!isMobileTeamCarouselActive() || totalTeamSlides <= 1) return;
+                stopTeamAutoScroll(); // Limpa intervalo anterior, se houver
+                teamCarouselInterval = setInterval(() => {
+                    if (teamIsTransitioning || document.hidden) return;
+                    teamCurrentSlide = (teamCurrentSlide + 1) % totalTeamSlides;
+                    updateTeamSlider();
+                    updateTeamButtonsVisibility();
+                }, 5000); // Altere 5000 para o intervalo desejado em milissegundos
+            }
+
+            function stopTeamAutoScroll() {
+                clearInterval(teamCarouselInterval);
+            }
+
+            teamCarouselContainer.addEventListener('mouseenter', stopTeamAutoScroll);
+            teamCarouselContainer.addEventListener('mouseleave', startTeamAutoScroll);
 
             if (teamNextButton && teamPrevButton && totalTeamSlides > 0) {
                 teamNextButton.addEventListener('click', () => {
@@ -356,30 +391,227 @@
                 teamCurrentSlide = 0; // Sempre reseta para o primeiro slide ao redimensionar ou inicializar
                 updateTeamSlider(); // Aplica o transform (ou reseta se não for mobile)
                 updateTeamButtonsVisibility(); // Atualiza a visibilidade dos botões
+                startTeamAutoScroll(); // Inicia ou reinicia o auto-scroll
             };
 
             initializeOrAdjustTeamCarousel(); // Chamada inicial
+            
             window.addEventListener('resize', initializeOrAdjustTeamCarousel);
-        }
-    });document.querySelectorAll('nav a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
+        } // Fim do if teamCarouselContainer
 
-        if (href.startsWith('#')) {
-            e.preventDefault();
+        // Código para rolagem suave dos links da navegação
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
 
-            const targetId = href;
-            const targetElement = document.querySelector(targetId);
+                // Verifica se é um link interno para a mesma página
+                if (href.startsWith('index.html#') || href.startsWith('#')) {
+                    e.preventDefault();
 
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 70,
-                    behavior: 'smooth'
-                });
+                    const targetId = href.substring(href.indexOf('#')); // Pega o # e o que vem depois
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70, // Ajuste para o header fixo
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    }); // Fim do DOMContentLoaded
+    </script>
+    <script>
+    (() => {
+        let currentSlide = 0;
+        const slidesContainer = document.querySelector(".Slides");
+        const prevButton = document.querySelector(".avaliacao-prev");
+        const nextButton = document.querySelector(".avaliacao-next");
+        let totalSlides = 0;
+        let isTransitioning = false;
+        let slideWidth = 0;
+        let slideGap = 0;
+        let cardsPerPage = 3;
+        let assessmentCarouselInterval;
+        let assessmentTransitionTimeoutId; // Para o fallback do transitionend
+
+        // Função para calcular quantos cards mostrar por página, adaptando para mobile
+        function calculateCardsPerPage() {
+            if (window.innerWidth <= 768) { // Ponto de quebra para mobile, igual ao CSS
+                cardsPerPage = 1;
+            } else {
+                // Desktop: mostra até 3 cards, ou menos se não houver slides suficientes
+                cardsPerPage = Math.min(totalSlides, 3); // Garante que não tente mostrar mais slides do que existem
             }
         }
-    });
-    });
+        function calculateSlideDimensions() {
+            if (slidesContainer.children.length > 0) {
+                slideWidth = slidesContainer.children[0].offsetWidth;
+                slideGap = parseFloat(window.getComputedStyle(slidesContainer).gap) || 0;
+            }
+        }
+
+        function calculateVisibleWidth() {
+            return (slideWidth + slideGap) * cardsPerPage;
+        }
+
+        function updateSlider() {
+            if (totalSlides === 0 || isTransitioning) return;
+
+            isTransitioning = true;
+
+            const transitionDuration = 500; // Deve corresponder à duração da transição no CSS (0.5s)
+            if (window.innerWidth <= 768 && cardsPerPage === 1) { // Cenário mobile com 1 card por página
+                const translateXPercent = -currentSlide * 100;
+                slidesContainer.style.transform = `translateX(${translateXPercent}%)`;
+            } else { // Cenário desktop ou mobile com múltiplos cards por página (se aplicável no futuro)
+                const visibleWidth = calculateVisibleWidth(); // (slideWidth + slideGap) * cardsPerPage
+                const translateX = -currentSlide * visibleWidth;
+                slidesContainer.style.transform = `translateX(${translateX}px)`;
+            }
+
+            // Limpa timeout anterior se houver
+            clearTimeout(assessmentTransitionTimeoutId);
+
+            const handleTransitionEnd = () => {
+                clearTimeout(assessmentTransitionTimeoutId); // Limpa o fallback
+                isTransitioning = false;
+                slidesContainer.removeEventListener("transitionend", handleTransitionEnd);
+            };
+            slidesContainer.addEventListener("transitionend", handleTransitionEnd);
+
+            // Fallback caso o transitionend não dispare
+            assessmentTransitionTimeoutId = setTimeout(() => {
+                console.warn('Assessment carousel transitionend fallback triggered.');
+                handleTransitionEnd(); // Chama o handler para resetar o estado
+            }, transitionDuration + 100); // Um pouco mais que a duração da transição
+        }
+
+        function addSlidesToSlider(comentarios) {
+            isTransitioning = true;
+
+            slidesContainer.style.transition = "none";
+            slidesContainer.innerHTML = "";
+
+            if (!comentarios || comentarios.length === 0) {
+                const slide = document.createElement("div");
+                slide.classList.add("slide-dinamico");
+                slide.innerHTML = `
+                    <div class=".Slides-card">
+                    <h3 class="nome-comentario">Nenhum comentário ainda</h3>
+                    <p class="texto-comentario">Seja o primeiro a deixar seu comentário!</p>
+                    </div>
+                `;
+                slidesContainer.appendChild(slide);
+            } else {
+                comentarios.forEach((comentario) => {
+                    const slide = document.createElement("div");
+                    slide.classList.add("slide-dinamico");
+                    slide.innerHTML = `
+                    <div>
+                        <h3 class="nome-comentario">${comentario.nome || "Anônimo"}</h3>
+                        <p class="texto-comentario" style="white-space: pre-wrap;">${
+                        comentario.mensagem || "Sem mensagem"
+                        }</p>
+                        <div class="estrelas">${"&#9733".repeat(comentario.nota || 0)}</div>
+                    </div>
+                    `;
+                    slidesContainer.appendChild(slide);
+                });
+            }
+
+            totalSlides = slidesContainer.children.length;
+            currentSlide = 0;
+            slidesContainer.style.transform = "translateX(0)";
+
+            calculateSlideDimensions(); // Calcula slideWidth e slideGap
+            calculateCardsPerPage();
+            updateButtonsVisibility();
+            startAssessmentAutoScroll(); // Inicia o auto-scroll após adicionar slides
+
+            void slidesContainer.offsetWidth; // Força o layout
+
+            slidesContainer.style.transition =
+            "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+            isTransitioning = false;
+        }
+
+        function updateButtonsVisibility() {
+            const prevButton = document.querySelector(".avaliacao-prev");
+            const nextButton = document.querySelector(".avaliacao-next");
+            const totalPages = Math.ceil(totalSlides / cardsPerPage);
+
+            if (totalSlides <= cardsPerPage || totalPages <= 1) {
+                prevButton.style.display = "none";
+                nextButton.style.display = "none";
+            } else {
+                prevButton.style.display = currentSlide === 0 ? "none" : "block";
+                nextButton.style.display = currentSlide === totalPages - 1 ? "none" : "block";
+            }
+        }
+
+        function startAssessmentAutoScroll() {
+            if (isTransitioning) return; // Não iniciar se já estiver em transição de adição de slides
+            const totalPages = Math.ceil(totalSlides / cardsPerPage);
+            if (totalPages <= 1) {
+                stopAssessmentAutoScroll(); // Para o scroll se não houver páginas suficientes
+                return;
+            }
+            stopAssessmentAutoScroll(); // Limpa intervalo anterior
+            assessmentCarouselInterval = setInterval(() => {
+                if (isTransitioning || document.hidden) return;
+                currentSlide = (currentSlide + 1) % totalPages;
+                updateSlider();
+                updateButtonsVisibility();
+            }, 5000); // Altere 5000 para o intervalo desejado
+        }
+
+        function stopAssessmentAutoScroll() {
+            clearInterval(assessmentCarouselInterval);
+        }
+        nextButton.addEventListener("click", () => {
+            if (isTransitioning) return;
+            const totalPages = Math.ceil(totalSlides / cardsPerPage);
+            if (currentSlide < totalPages - 1) {
+                currentSlide++;
+                updateSlider();
+                updateButtonsVisibility();
+            }
+        });
+
+        prevButton.addEventListener("click", () => {
+            if (isTransitioning) return;
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlider();
+                updateButtonsVisibility();
+            }
+        });
+
+        // Adiciona um listener para redimensionamento da janela
+        window.addEventListener('resize', () => {
+            // É uma boa prática usar debounce em eventos de resize para performance,
+            // mas para simplificar:
+            const oldCardsPerPage = cardsPerPage;
+            calculateSlideDimensions(); // Recalcula dimensões pois podem mudar
+            calculateCardsPerPage();    // Recalcula cards por página (pode mudar entre desktop/mobile)
+
+            // Se o número de cards por página mudou, ou se não estamos no primeiro slide, reseta.
+            if (oldCardsPerPage !== cardsPerPage || currentSlide !== 0) {
+                currentSlide = 0; // Reseta para o primeiro slide/página
+            }
+            updateSlider(); // Aplica a nova transformação
+            updateButtonsVisibility(); // Atualiza a visibilidade dos botões
+            startAssessmentAutoScroll(); // Reinicia o auto-scroll ao redimensionar
+        });
+
+        // Pausar e resumir auto-scroll do carrossel de avaliações
+        slidesContainer.closest('.Slider').addEventListener('mouseenter', stopAssessmentAutoScroll);
+        slidesContainer.closest('.Slider').addEventListener('mouseleave', startAssessmentAutoScroll);
+
+        window.addSlidesToSlider = addSlidesToSlider;
+    })();
     </script>
     <script>
     (() => {
@@ -437,243 +669,6 @@
           window.addSlidesToSlider(comentarios);
         }
       });
-    })();
-    </script>
-
-    <script>
-    (() => {
-    let currentSlide = 0;
-    const slidesContainer = document.querySelector(".Slides");
-    let totalSlides = 0;
-    let isTransitioning = false;
-
-    // Função para atualizar a posição do slide
-    function updateSlider() {
-        if (totalSlides === 0 || isTransitioning) return;
-
-        isTransitioning = true;
-        slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-        // Remove o flag quando a transição terminar
-        const handleTransitionEnd = () => {
-        isTransitioning = false;
-        slidesContainer.removeEventListener("transitionend", handleTransitionEnd);
-        };
-
-        slidesContainer.addEventListener("transitionend", handleTransitionEnd);
-    }
-
-    // Função para adicionar slides
-    function addSlidesToSlider(comentarios) {
-        isTransitioning = true; // Bloqueia durante a atualização
-
-        slidesContainer.style.transition = "none"; // Desativa transição temporariamente
-        slidesContainer.innerHTML = "";
-
-        if (!comentarios || comentarios.length === 0) {
-        const slide = document.createElement("div");
-        slide.classList.add("slide-dinamico");
-        slide.innerHTML = `
-            <div class=".Slides-card">
-            <h3 class="nome-comentario">Nenhum comentário ainda</h3>
-            <p class="texto-comentario">Seja o primeiro a deixar seu comentário!</p>
-            </div>
-        `;
-        slidesContainer.appendChild(slide);
-        } else {
-        comentarios.forEach((comentario) => {
-            const slide = document.createElement("div");
-            slide.classList.add("slide-dinamico");
-            slide.innerHTML = `
-            <div>
-                <h3 class="nome-comentario">${comentario.nome || "Anônimo"}</h3>
-                <p class="texto-comentario" style="white-space: pre-wrap;">${
-                comentario.mensagem || "Sem mensagem"
-                }</p>
-                <div class="estrelas">${"&#9733".repeat(comentario.nota || 0)}</div>
-            </div>
-            `;
-            slidesContainer.appendChild(slide);
-        });
-        }
-
-        totalSlides = slidesContainer.children.length;
-        currentSlide = 0;
-        slidesContainer.style.transform = "translateX(0)";
-
-        // Força o navegador a reconhecer a mudança
-        void slidesContainer.offsetWidth;
-
-        // Reativa a transição
-        slidesContainer.style.transition =
-        "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-        isTransitioning = false;
-    }
-
-    // Event listeners para os botões
-    document.querySelector(".avaliacao-next").addEventListener("click", () => {
-        if (totalSlides <= 1 || isTransitioning) return;
-        currentSlide = (currentSlide + 1) % totalSlides;
-        updateSlider();
-    });
-
-    document.querySelector(".avaliacao-prev").addEventListener("click", () => {
-        if (totalSlides <= 1 || isTransitioning) return;
-        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-        updateSlider();
-    });
-
-    // Torna a função acessível globalmente
-    window.addSlidesToSlider = addSlidesToSlider;
-    })();
-    </script>
-
-    <script>
-    (() => {
-        let currentSlide = 0;
-        const slidesContainer = document.querySelector(".Slides");
-        const prevButton = document.querySelector(".avaliacao-prev");
-        const nextButton = document.querySelector(".avaliacao-next");
-        let totalSlides = 0;
-        let isTransitioning = false;
-        let slideWidth = 0;
-        let slideGap = 0;
-        let cardsPerPage = 3;
-
-        // Função para calcular quantos cards mostrar por página, adaptando para mobile
-        function calculateCardsPerPage() {
-            if (window.innerWidth <= 768) { // Ponto de quebra para mobile, igual ao CSS
-                cardsPerPage = 1;
-            } else {
-                // Desktop: mostra até 3 cards, ou menos se não houver slides suficientes
-                cardsPerPage = Math.min(totalSlides, 3); // Garante que não tente mostrar mais slides do que existem
-            }
-        }
-        function calculateSlideDimensions() {
-            if (slidesContainer.children.length > 0) {
-                slideWidth = slidesContainer.children[0].offsetWidth;
-                slideGap = parseFloat(window.getComputedStyle(slidesContainer).gap) || 0;
-            }
-        }
-
-        function calculateVisibleWidth() {
-            return (slideWidth + slideGap) * cardsPerPage;
-        }
-
-        function updateSlider() {
-            if (totalSlides === 0 || isTransitioning) return;
-
-            isTransitioning = true;
-            const visibleWidth = calculateVisibleWidth();
-            const translateX = -currentSlide * visibleWidth;
-            slidesContainer.style.transform = `translateX(${translateX}px)`;
-
-            const handleTransitionEnd = () => {
-                isTransitioning = false;
-                slidesContainer.removeEventListener("transitionend", handleTransitionEnd);
-            };
-
-            slidesContainer.addEventListener("transitionend", handleTransitionEnd);
-        }
-
-        function addSlidesToSlider(comentarios) {
-            isTransitioning = true;
-
-            slidesContainer.style.transition = "none";
-            slidesContainer.innerHTML = "";
-
-            if (!comentarios || comentarios.length === 0) {
-                const slide = document.createElement("div");
-                slide.classList.add("slide-dinamico");
-                slide.innerHTML = `
-                    <div class=".Slides-card">
-                    <h3 class="nome-comentario">Nenhum comentário ainda</h3>
-                    <p class="texto-comentario">Seja o primeiro a deixar seu comentário!</p>
-                    </div>
-                `;
-                slidesContainer.appendChild(slide);
-            } else {
-                comentarios.forEach((comentario) => {
-                    const slide = document.createElement("div");
-                    slide.classList.add("slide-dinamico");
-                    slide.innerHTML = `
-                    <div>
-                        <h3 class="nome-comentario">${comentario.nome || "Anônimo"}</h3>
-                        <p class="texto-comentario" style="white-space: pre-wrap;">${
-                        comentario.mensagem || "Sem mensagem"
-                        }</p>
-                        <div class="estrelas">${"&#9733".repeat(comentario.nota || 0)}</div>
-                    </div>
-                    `;
-                    slidesContainer.appendChild(slide);
-                });
-            }
-
-            totalSlides = slidesContainer.children.length;
-            currentSlide = 0;
-            slidesContainer.style.transform = "translateX(0)";
-
-            calculateSlideDimensions(); // Calcula slideWidth e slideGap
-            calculateCardsPerPage();
-            updateButtonsVisibility();
-
-            void slidesContainer.offsetWidth; // Força o layout
-
-            slidesContainer.style.transition =
-            "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-            isTransitioning = false;
-        }
-
-        function updateButtonsVisibility() {
-            const prevButton = document.querySelector(".avaliacao-prev");
-            const nextButton = document.querySelector(".avaliacao-next");
-            const totalPages = Math.ceil(totalSlides / cardsPerPage);
-
-            if (totalSlides <= cardsPerPage || totalPages <= 1) {
-                prevButton.style.display = "none";
-                nextButton.style.display = "none";
-            } else {
-                prevButton.style.display = currentSlide === 0 ? "none" : "block";
-                nextButton.style.display = currentSlide === totalPages - 1 ? "none" : "block";
-            }
-        }
-
-        nextButton.addEventListener("click", () => {
-            if (isTransitioning) return;
-            const totalPages = Math.ceil(totalSlides / cardsPerPage);
-            if (currentSlide < totalPages - 1) {
-                currentSlide++;
-                updateSlider();
-                updateButtonsVisibility();
-            }
-        });
-
-        prevButton.addEventListener("click", () => {
-            if (isTransitioning) return;
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlider();
-                updateButtonsVisibility();
-            }
-        });
-
-        // Adiciona um listener para redimensionamento da janela
-        window.addEventListener('resize', () => {
-            // É uma boa prática usar debounce em eventos de resize para performance,
-            // mas para simplificar:
-            const oldCardsPerPage = cardsPerPage;
-            calculateSlideDimensions(); // Recalcula dimensões pois podem mudar
-            calculateCardsPerPage();    // Recalcula cards por página (pode mudar entre desktop/mobile)
-
-            // Se o número de cards por página mudou, ou se não estamos no primeiro slide, reseta.
-            if (oldCardsPerPage !== cardsPerPage || currentSlide !== 0) {
-                currentSlide = 0; // Reseta para o primeiro slide/página
-            }
-            updateSlider(); // Aplica a nova transformação
-            updateButtonsVisibility(); // Atualiza a visibilidade dos botões
-        });
-
-        window.addSlidesToSlider = addSlidesToSlider;
     })();
     </script>
 
